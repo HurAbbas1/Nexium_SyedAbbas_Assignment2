@@ -17,8 +17,7 @@ export async function POST(req: Request) {
 
     return Response.json({ urdu });
   } catch (err: unknown) {
-    const message =
-      err instanceof Error ? err.message : "Unknown error occurred";
+    const message = err instanceof Error ? err.message : String(err);
     console.error("API Error:", message);
     return new Response("Failed to summarise", { status: 500 });
   }

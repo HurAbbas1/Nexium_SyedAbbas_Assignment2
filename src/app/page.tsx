@@ -12,8 +12,7 @@ export default function Home() {
   const [showLoader, setShowLoader] = useState(true);
 
   const handleSummarise = async () => {
-    if (!url.trim()) return;
-
+    if (!url) return;
     setLoading(true);
     try {
       const res = await fetch('/api/summarise', {
@@ -40,13 +39,12 @@ export default function Home() {
         🚀 Blog Summariser
       </h1>
 
-      <section className="w-full max-w-xl space-y-4 bg-white/5 dark:bg-white/10 p-6 rounded-xl shadow-lg backdrop-blur-lg border border-purple-500/30">
+      <div className="w-full max-w-xl space-y-4 bg-white/5 dark:bg-white/10 p-6 rounded-xl shadow-lg backdrop-blur-lg border border-purple-500/30">
         <Input
           placeholder="Paste blog URL here..."
           value={url}
           onChange={(e) => setUrl(e.target.value)}
           className="bg-black/20 text-white placeholder:text-purple-300 border-purple-500 focus:ring-2 focus:ring-purple-500/70"
-          aria-label="Blog URL"
         />
 
         <Button
@@ -60,10 +58,10 @@ export default function Home() {
         {summary && (
           <div className="mt-4 border border-purple-400 rounded-xl p-4 bg-purple-900/20 text-white shadow-inner">
             <h2 className="font-semibold text-lg mb-2">📄 Urdu Summary:</h2>
-            <p className="text-purple-100 leading-relaxed whitespace-pre-wrap">{summary}</p>
+            <p className="text-purple-100 leading-relaxed">{summary}</p>
           </div>
         )}
-      </section>
+      </div>
     </main>
   );
 }
