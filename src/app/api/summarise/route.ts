@@ -17,6 +17,7 @@ export async function POST(req: Request) {
 
     return Response.json({ urdu });
   } catch (err: unknown) {
+    // eslint-disable-next-line no-console
     const message = err instanceof Error ? err.message : String(err);
     console.error("API Error:", message);
     return new Response("Failed to summarise", { status: 500 });
