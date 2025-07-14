@@ -22,7 +22,7 @@ export default function Home() {
       });
       const data = await res.json();
       setSummary(data.urdu || 'Something went wrong.');
-    } catch (error) {
+    } catch {
       setSummary('Failed to fetch summary.');
     } finally {
       setLoading(false);
@@ -50,7 +50,7 @@ export default function Home() {
         <Button
           onClick={handleSummarise}
           disabled={loading}
-          className="w-full bg-purple-700 hover:bg-purple-800 shadow-md text-white font-semibold transition duration-300"
+          className="w-full bg-purple-700 hover:bg-purple-800 shadow-md text-white font-semibold transition-colors duration-300"
         >
           {loading ? 'Summarising...' : 'Summarise'}
         </Button>
