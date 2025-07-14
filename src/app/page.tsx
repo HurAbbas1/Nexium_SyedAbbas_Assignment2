@@ -50,7 +50,7 @@ export default function Home() {
         <Button
           onClick={handleSummarise}
           disabled={loading}
-          className="w-full bg-purple-700 hover:bg-purple-800 text-white font-semibold transition-colors duration-300 shadow-md"
+          className="w-full bg-purple-700 hover:bg-purple-800 shadow-md text-white font-semibold transition-colors duration-300"
         >
           {loading ? 'Summarising...' : 'Summarise'}
         </Button>

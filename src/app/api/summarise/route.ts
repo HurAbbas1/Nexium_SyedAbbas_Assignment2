@@ -22,9 +22,9 @@ export async function POST(req: Request) {
     await saveToMongo({ url, fullText: blogText });
 
     return Response.json({ urdu });
-  } catch (error: unknown) {
-    const errMsg = error instanceof Error ? error.message : String(error);
-    console.error("❌ API Error:", errMsg);
+  } catch (err: unknown) {
+    const message = err instanceof Error ? err.message : String(err);
+    console.error("❌ API Error:", message);
     return new Response("Failed to summarise", { status: 500 });
   }
 }
