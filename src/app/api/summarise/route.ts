@@ -6,7 +6,7 @@ import { saveToMongo } from "@/lib/mongo";
 
 export async function POST(req: Request) {
   try {
-    const { url } = await req.json();
+    const { url }: { url: string } = await req.json();
 
     const blogText = await scrapeBlog(url);
     const summary = summarise(blogText);
@@ -17,8 +17,8 @@ export async function POST(req: Request) {
 
     return Response.json({ urdu });
   } catch (err: unknown) {
-    // eslint-disable-next-line no-console
-    const message = err instanceof Error ? err.message : String(err);
+    const message =
+      err instanceof Error ? err.message : "Unknown error occurred";
     console.error("API Error:", message);
     return new Response("Failed to summarise", { status: 500 });
   }
