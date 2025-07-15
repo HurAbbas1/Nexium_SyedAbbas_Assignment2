@@ -2,18 +2,121 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Base styling for body */
-body {
-  background-color: var(--background);
-  color: var(--foreground);
-  background: linear-gradient(135deg, #1a002b, #220052, #0d001f);
-  background-size: 400% 400%;
-  animation: gradientShift 10s ease infinite;
-  transition: background 0.5s ease-in-out;
+/* Theme-based background color variables */
+:root {
+  --left-color: #111111;
+  --right-color: #2c2c2c;
+  --divider-color: #ffffffcc;
 }
 
-/* Background animation */
-@keyframes gradientShift {
+body {
+  background: linear-gradient(to right, var(--left-color) 49.5%, var(--right-color) 50.5%);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  transition: background 1s ease-in-out;
+  color: #fff;
+  overflow: hidden;
+}
+
+/* Curly wave divider in center — wide, glowy, behind title */
+.curly-divider {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 100%;
+  width: 8vw;
+  z-index: 0; /* keep it behind title */
+  pointer-events: none;
+  overflow: hidden;
+  filter: drop-shadow(0 0 8px #ffffffaa) drop-shadow(0 0 12px #ffffff66);
+  mix-blend-mode: overlay;
+}
+
+.curly-divider svg {
+  height: 100%;
+  width: 100%;
+  display: block;
+  fill: var(--left-color);
+  stroke: url(#waveGradient);
+  stroke-width: 3.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 6, 10;
+  animation: glitterWave 2.5s linear infinite;
+}
+
+@keyframes glitterWave {
+  0% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: -50;
+  }
+}
+
+/* Title shimmer ONLY on text (not rocket) */
+.title-glow {
+  position: relative;
+  font-size: 2.75rem;
+  font-weight: 900;
+  display: inline-flex;
+  gap: 0.5rem;
+  align-items: center;
+  color: white;
+  z-index: 10; /* above wave */
+}
+
+.title-text {
+  position: relative;
+  display: inline-block;
+  background: linear-gradient(to right, #ffffff 20%, #dddddd 40%, #ffffff 60%, #dddddd 80%);
+  background-size: 200% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shineFlow 4s linear infinite;
+}
+
+@keyframes shineFlow {
+  0% {
+    background-position: 200% center;
+  }
+  100% {
+    background-position: -200% center;
+  }
+}
+
+/* Glowing animated border around input/button box */
+.glow-border {
+  position: relative;
+  z-index: 2;
+}
+
+.glow-border::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(
+    45deg,
+    #7e22ce,
+    #9333ea,
+    #f472b6,
+    #9333ea,
+    #7e22ce
+  );
+  background-size: 400% 400%;
+  animation: borderLight 4s linear infinite;
+  z-index: -1;
+  border-radius: 1rem;
+  filter: blur(4px);
+  opacity: 0.8;
+}
+
+@keyframes borderLight {
   0% {
     background-position: 0% 50%;
   }
@@ -25,21 +128,7 @@ body {
   }
 }
 
-/* Neon flicker effect */
-.neon-flicker {
-  text-shadow: 0 0 5px #9333ea, 0 0 10px #9333ea, 0 0 20px #9333ea;
-  animation: flicker 2s infinite;
-}
-
-@keyframes flicker {
-  0%, 100% { opacity: 1; }
-  45% { opacity: 0.7; }
-  55% { opacity: 0.9; }
-  70% { opacity: 0.4; }
-  85% { opacity: 0.6; }
-}
-
-/* Custom animation utility */
+/* Fade-in animation utility */
 @layer utilities {
   .animate-fade-in {
     animation: fadeIn 1s ease-in-out both;

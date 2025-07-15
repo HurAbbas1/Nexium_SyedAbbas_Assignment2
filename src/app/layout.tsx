@@ -40,11 +40,6 @@ export default function RootLayout({
           duration-1000 
           font-sans
         `}
-        style={{
-          background: "linear-gradient(135deg, #1a002b, #220052, #0d001f)",
-          backgroundSize: "400% 400%",
-          animation: "gradientShift 10s ease infinite",
-        }}
       >
         {children}
       </body>
